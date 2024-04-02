@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "bold";
+    src: url("/static/basic/fonts/Barlow/Barlow-Black.ttf");
+}
+
+@font-face {
+    font-family: "normal";
+    src: url("/static/basic/fonts/Barlow/Barlow-Light.ttf");
+}
+
+body {
+    font-family: "normal";
+    font-size: medium;
+}
+
+.l1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eee;
+}
+
+.l2 {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ddd;
+}
+
+.l3 {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ccc;
+}
+
+.ofs-1 { margin-left: 10%; }
+.ofs-2 { margin-left: 20%; }
+.ofs-3 { margin-left: 30%; }
+.ofs-4 { margin-left: 40%; }
+.ofs-5 { margin-left: 50%; }
+.ofs-6 { margin-left: 60%; }
+.ofs-7 { margin-left: 70%; }
+.ofs-8 { margin-left: 80%; }
+.ofs-9 { margin-left: 90%; }
+
+.w1 { width: 10%;}
+.w2 { width: 20%;}
+.w3 { width: 30%;}
+.w4 { width: 40%;}
+.w5 { width: 50%;}
+.w6 { width: 60%;}
+.w7 { width: 70%;}
+.w8 { width: 80%;}
+.w9 { width: 90%;}
+
+.block {
+    display: inline-block;
+}
+
+.bold {
+    font-family: "bold";
+    font-size: larger;
+}
+
+.superbold {
+    font-family: "bold";
+    font-size: xx-large;
+}
+
+.secret {
+    color: #aaa;
+}
+
+a {
+    color: darkcyan
+}

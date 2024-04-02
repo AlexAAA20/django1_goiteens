@@ -1,0 +1,37 @@
+{% extends 'basic/base.html' %}
+{% load static %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="superbold ofs-4">Main Page</p>
+        <div class="l2">
+            <div class="l3 w3 block">
+                <p class="bold block">You and your account</p><br>
+                <a href="http://127.0.0.1:8000/register">Register</a><br>
+                <a href="http://127.0.0.1:8000/login">Login</a><br>
+                <a href="http://127.0.0.1:8000/settings">Settings</a>
+            </div>
+            <div class="l3 ofs-1 w3 block">
+                <p class="bold block">Browse</p><br>
+                <a href="http://127.0.0.1:8000/fullList">Entirety</a><br>
+                <a href="http://127.0.0.1:8000/best">Leaders</a><br>
+                <a href="http://127.0.0.1:8000/favouritelist">Favourites</a>
+            </div><br>
+            <div class="l3 w3 block">
+                <p class="bold block">Amazing stuff</p><br>
+                <a href="http://127.0.0.1:8000/info">About</a><br>
+                <a href="http://127.0.0.1:8000/tos">Terms of use</a><br>
+                <a href="http://127.0.0.1:8000/cp">Copyright</a>
+            </div>
+            <div class="l3 ofs-1 w3 block">
+                <p class="bold block">Create</p><br>
+                <a href="http://127.0.0.1:8000/create/about">About</a><br>
+                <a href="http://127.0.0.1:8000/create/project">Project list</a><br>
+                <a href="http://127.0.0.1:8000/create/news">News</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
