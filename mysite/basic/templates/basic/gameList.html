@@ -1,0 +1,18 @@
+{% extends 'basic/tools/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="superbold ofs-4">Games</p>
+        <div class="l2">
+            {% for game in object_list %}
+                <p>{{ game.name }} &lpar;made by {{ game.author.username }}&rpar;, <a href="">...</a></p>
+            {% empty %}
+                <p>We couldn't find any games. Reset the page to try again!</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
