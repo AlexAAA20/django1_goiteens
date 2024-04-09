@@ -1,0 +1,22 @@
+{% extends 'basic/tools/base.html' %}
+{% load static %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="superbold ofs-4">Object Page</p>
+        <p class="bold ofs-4">{{ object.name }}</p>
+        <p>Made by {{ object.creator.username }}</p>
+        <div class="l2">
+            <p>{{ object.description }}</p>
+            <button onclick="redirect('{{ object.url }}')">Open</button>
+            <script>
+                function redirect(destination) {
+                    window.location.href = destination
+                }
+            </script>
+        </div>
+    </div>
+{% endblock %}
+
