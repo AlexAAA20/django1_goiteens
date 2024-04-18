@@ -1,0 +1,18 @@
+{% extends 'basic/tools/base.html' %}
+{% load static %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="superbold ofs-4">Terminate the account</p>
+        <div class="l2">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <p>We will miss you!</p>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

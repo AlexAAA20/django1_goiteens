@@ -9,7 +9,7 @@
         <div class="l2">
             <ul>
                 {% for object in object_list %}
-                    <li>{{ object.name }} &lpar;made by {{ object.creator.username }}&rpar;, <a href="http://127.0.0.1:8000/object{{ object.id }}">Open...</a></li>
+                    <li>{{ object.name }} &lpar;made by {{ object.creator.username }}&rpar;, <a href="http://127.0.0.1:8000/object/{{ object.id }}">Open...</a></li>
                 {% empty %}
                     <li>We couldn't find any objects. Reset the page to try again!</li>
                 {% endfor %}

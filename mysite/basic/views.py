@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, ListView, DetailView
 from .models import Object, User
+from .forms import RegisterForm, LoginForm
+
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, template_name="basic/index.html")
+        return render(request, template_name="basic/index.html", context={"req": request})
 
 
 class ObjectsListView(ListView):
@@ -12,7 +15,93 @@ class ObjectsListView(ListView):
     template_name = "basic/objectList.html"
     paginate_by = 50
 
+
 class ObjectView(DetailView):
     model = Object
     template_name = "basic/objectShow.html"
     context_object_name = 'object'
+
+
+class AboutView(View):
+    template_name = "basic/about.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name="basic/about.html")
+
+
+class RegisterView(View):
+    form_class = RegisterForm
+    initial = {"key": "value"}
+    template_name = "basic/signup.html"
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, template_name="basic/signup.html", context={"form": form, "request": request})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if not request.user.is_authenticated:
+            if form.is_valid():
+                raw_password = form.cleaned_data["password"]
+                repeat_password = form.cleaned_data["repeat_password"]
+
+                username = form.cleaned_data["username"]
+                if raw_password == repeat_password:
+                    user = User.objects.create(username=username)
+                    user.set_password(raw_password)
+                    print(user.password)
+                    print(user.username)
+                    user.save()
+                    login(request, user)
+                    return redirect("index")
+        else:
+            return render(request, self.template_name, {"form": form, "request": request})
+        return render(request, self.template_name, {"form": form, "request": request})
+
+
+class LoginView(View):
+    form_class = LoginForm
+    initial = {"key": "value"}
+    template_name = "basic/login.html"
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, template_name="basic/login.html", context={"form": form, "request": request})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if not request.user.is_authenticated:
+            if form.is_valid():
+                password = form.cleaned_data["password"]
+
+                username = form.cleaned_data["username"]
+
+                users_wtsu = User.objects.filter(username=username)
+                if len(users_wtsu) == 1:
+                    user = authenticate(
+                        username=username,
+                        password=password
+                        )
+                    if user:
+                        login(request, user)
+                        return redirect("index")
+        else:
+            return render(request, self.template_name, {"form": form, "request": request})
+        return render(request, self.template_name, {"form": form, "request": request})
+
+
+class LogoutView(View):
+    form_class = LoginForm
+    initial = {"key": "value"}
+    template_name = "basic/logout.html"
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+
+        return redirect("index")
+
+
+class TerminateAccountView(View):
+    form_class = LoginForm
+    initial = {"key": "value"}
+    template_name = "basic/terminate.html"

@@ -1,0 +1,22 @@
+{% extends 'basic/tools/base.html' %}
+{% load static %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="superbold ofs-4">Sign up</p>
+        <div class="l2">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Submit</button>
+                <p>Please, use something that is longer than <span class="bold">three</span> characters.</p>
+                {% if request.user.is_authenticated %}
+                <p>Though, you already registered.</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
