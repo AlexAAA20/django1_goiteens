@@ -1,0 +1,18 @@
+{% extends 'basic/tools/base.html' %}
+{% load static %}
+
+{% block title %}Project{% endblock %}
+
+{% block content %}
+    <div class="l1">
+        <p class="bold">Create a new object!</p>
+        <div class="l2">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Create it!</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
