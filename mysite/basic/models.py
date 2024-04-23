@@ -13,3 +13,4 @@ class Object(models.Model):
 	url = models.URLField(null=False)
 	creator = models.ForeignKey(User, on_delete=models.CASCADE)
 	tags = models.ManyToManyField(Tag)
+	views = models.IntegerField(default=0, blank=0)

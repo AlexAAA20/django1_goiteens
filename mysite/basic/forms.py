@@ -12,3 +12,9 @@ class RegisterForm(forms.Form):
 class TerminationForm(forms.Form):
 	are_you_sure = forms.ChoiceField(choices=["Yes", "No"])
 	security = forms.CharField(label="Password, just for security", widget=forms.PasswordInput())
+
+class CreateFastForm(forms.Form):
+	name = forms.CharField(label="Project Name")
+	description = forms.CharField(label="Project Description")
+	tags = forms.CharField(label="Add tags, separate by ,")
+	url = forms.URLField(label="Project Link")

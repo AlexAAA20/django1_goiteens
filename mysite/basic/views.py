@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, ListView, DetailView
-from .models import Object, User
-from .forms import RegisterForm, LoginForm
+from .models import Object, User, Tag
+from django.db.models import Q
+from .forms import RegisterForm, LoginForm, CreateFastForm
 
 
 class IndexView(View):
@@ -99,6 +100,35 @@ class LogoutView(View):
         logout(request)
 
         return redirect("index")
+
+class CreateAFastObject(View):
+    form_class = CreateFastForm
+    initial = {"key": "value"}
+    template_name = "basic/quick_create.html"
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, context={"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            description = form.cleaned_data["description"]
+            url = form.cleaned_data["url"]
+            tags = form.cleaned_data["tags"].split(",")
+            all_tags = Tag.objects.filter(name__in=tags)
+
+            # Create new tags if they don't exist
+            for tag in tags:
+                if not all_tags.filter(name=tag).exists():
+                    new_tag = Tag.objects.create(name=tag)
+                    all_tags |= Tag.objects.filter(pk=new_tag.pk)
+
+            new_object = Object.objects.create(name=name, description=description, url=url, creator=request.user)
+            new_object.tags.set(all_tags)
+
+        return render(request, self.template_name, context={"form": form})
 
 
 class TerminateAccountView(View):
