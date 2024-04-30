@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, ListView, DetailView
-from .models import Object, User, Tag, Comment, ObjectAdditionalInfo
+from .models import Object, User, Tag
 from django.db.models import Q
 from django.http import HttpResponse
 from .forms import RegisterForm, LoginForm, CreateFastForm
@@ -127,9 +127,8 @@ class CreateAFastObject(View):
                     all_tags |= Tag.objects.filter(pk=new_tag.pk)
 
             new_object = Object.objects.create(name=name, description=description, url=url, creator=request.user)
-            base = ObjectAdditionalInfo.objects.create(views=0)
-            new_object.additional_info = base
             new_object.tags.set(all_tags)
+            return redirect("index")
 
         return render(request, self.template_name, context={"form": form})
 
